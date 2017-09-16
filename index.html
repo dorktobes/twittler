@@ -6,6 +6,20 @@
   </head>
   <body>
     <script>
+    function dateRenderer(dateObj){
+      if(!dateObj){
+        console.log('undefined date')
+        return '00/00/0000';
+      }
+      var date = '';
+      date += dateObj.getMonth() + 1;
+      date += '/';
+      date += dateObj.getDay();
+      date += '/';
+      date += dateObj.getFullYear();
+      return date;
+    }
+    console.log(dateRenderer( new Date()) );
 
       $(document).ready(function(){
         var $body = $('body');
@@ -14,6 +28,7 @@
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
+          console.log(tweet);
           var $tweet = $('<div></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);

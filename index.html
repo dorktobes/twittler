@@ -6,6 +6,7 @@
   </head>
   <body>
     <script>
+    //helper functions
     function dateRenderer(dateObj){
       if(!dateObj){
         console.log('undefined date')
@@ -46,8 +47,18 @@
       }
       return time;
     }
-    console.log(timeRenderer(new Date()))
+    function tweetBuilder(tweetObj){
+      var $user = $('<span></span>');
+      $user.addClass('user')
+      $user.text('@' + tweetObj.user);
+      var $timestamp = $('<span></span>');
+      $timestamp.addClass('timestamp')
+      $timestamp.text(timeRenderer(tweetObj.created_at) + ' ' + dateRenderer(tweetObj.created_at))
+      return $user.text() + ':' + tweetObj.message + ' -- ' + $timestamp.text();
 
+    }
+    
+//initial tweet printer
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
@@ -55,9 +66,9 @@
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          console.log(tweet);
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text(tweetBuilder(tweet)
+            );
           $tweet.appendTo($body);
           index -= 1;
         }

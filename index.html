@@ -5,6 +5,7 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
+  
     <script>
     //helper functions
     function dateRenderer(dateObj){
@@ -63,19 +64,26 @@
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
-
+        var $title = $('<header id="title"><h1>TWITTLER</h1></header>')
+        $title.appendTo($body);
+        var $button = $('<button type="button">Load new tweets</button>')
+        $button.appendTo($body);
         var index = streams.home.length - 1;
-        while(index >= 0){
+       while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
           $tweet.data('tweetID', index);
-          $tweet.text(tweetTextBuilder(tweet) + index);
+          $tweet.text(tweetTextBuilder(tweet));
           $tweet.appendTo($body);
           index -= 1;
         }
-
       });
-      
+
+      //create 'load new tweets' button
+        //when pressed
+          //check if first tweet on page's id + 1 is less than streams.home.length
+          //print 'new' tweets on page above the most recently printed tweets(.prependTo())
+
     </script>
   </body>
 </html>

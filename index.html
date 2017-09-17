@@ -19,7 +19,34 @@
       date += dateObj.getFullYear();
       return date;
     }
-    console.log(dateRenderer( new Date()) );
+    function timeRenderer(dateObj){
+      if(!dateObj){
+        console.log('undefined date object');
+        return '00:00';
+      }
+      var time = '';
+      //return hours in standard time
+      if(dateObj.getHours() > 12){
+        time += dateObj.getHours() - 12;
+      } else {
+        time += dateObj.getHours();
+      }
+      time += ':';
+      //return minutes in standard time
+      if(dateObj.getMinutes() < 10){
+        time += '0' + dateObj.getMinutes();
+      } else {
+        time += dateObj.getMinutes();
+      }
+      //add AM or PM tag
+      if(dateObj.getHours() >= 12){
+        time += ' PM';
+      } else {
+        time += ' AM';
+      }
+      return time;
+    }
+    console.log(timeRenderer(new Date()))
 
       $(document).ready(function(){
         var $body = $('body');

@@ -146,9 +146,11 @@
             $tweet.data('tweetID', i);
             $tweet.appendTo($userStream);
           }
+          var $homeButton = $('<button type="button" id="go_home">Return to Feed</button>');
+          $homeButton.appendTo($userStream);
           console.log($userStream);
           $('#stream').slideUp(400, function () {
-
+            $('#get_new').css({ 'display': 'none'});
             $userStream.appendTo($body);
             $userStream.slideDown();
           })

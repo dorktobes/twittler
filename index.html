@@ -7,7 +7,24 @@
   <body>
   
     <script>
-    //helper functions
+
+    
+    
+//initial set up
+      $(document).ready(function(){
+        var $body = $('body');
+        $body.html('');
+        //create and add title
+        var $title = $('<header id="title"><h1>TWITTLER</h1></header>');
+        $title.appendTo($body);
+        //create and add new tweet button
+        var $button = $('<button type="button" id="get_new">Load new tweets</button>');
+        $button.appendTo($body);
+        //create tweet stream
+        var $stream = $('<div id="stream"></div>');
+        $stream.appendTo($body);
+
+         //helper functions
     function dateRenderer(dateObj){
       if(!dateObj){
         console.log('undefined date')
@@ -59,6 +76,39 @@
     function userBuilder(tweetObj, target){
       var $user = $('<div></div>')
           $user.addClass('user');
+
+          //when clicked, creates user stream, hides main feed, and displays user stream
+          $user.click(function(){
+            var user = $(this).data('user');
+            console.log('clicked ' + user)
+            var streamName = user +'Stream';
+            var $userStream = $("<div id=" + streamName +"></div>");
+            $userStream.addClass('userStream');
+            for(var i = streams.users[user].length - 1; i >= 0; i--){
+              var tweet = streams.users[user][i];
+              console.log(tweet);
+              var $tweet = tweetBuilder(tweet);
+              $tweet.data('tweetID', i);
+              $tweet.appendTo($userStream);
+            }
+
+            var $homeButton = $('<button type="button" id="go_home">Return to Feed</button>');
+            $homeButton.click(function(){
+              $(this).parent().slideUp(400, function(){
+                $('#stream').slideDown();
+                $('#get_new').toggle();
+              })
+            
+            })
+            $homeButton.appendTo($userStream);
+
+            $('#stream').slideUp(400, function () {
+              $('#get_new').toggle();
+              $userStream.appendTo($body);
+              $userStream.slideDown();
+            })
+          })
+          
           $user.data('user', tweetObj.user);
           $user.text('@' + tweetObj.user);
           $user.appendTo(target);
@@ -80,21 +130,8 @@
           $time.text('--' + time + ' ' + date);
           $time.appendTo(target);
     }
-    
-    
-//initial set up
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-        //create and add title
-        var $title = $('<header id="title"><h1>TWITTLER</h1></header>');
-        $title.appendTo($body);
-        //create and add new tweet button
-        var $button = $('<button type="button" id="get_new">Load new tweets</button>');
-        $button.appendTo($body);
-        //create tweet stream
-        var $stream = $('<div id="stream"></div>');
-        $stream.appendTo($body);
+
+
         //initial tweet printer
         var index = streams.home.length - 1;
        while(index >= 0){
@@ -133,39 +170,47 @@
 
         //username clicked
       $('#stream').ready(function(){  
+
+
+
+
+
+
+
         //if username is clicked 
         $('div .user').on('click', function () {
-          var user = $(this).data('user');
-          console.log('clicked ' + user)
-          var streamName = user +'Stream';
-          var $userStream = $("<div id=" + streamName +"></div>");
-          $userStream.addClass('userStream');
-          for(var i = streams.users[user].length - 1; i >= 0; i--){
-            var tweet = streams.users[user][i];
-            console.log(tweet);
-            var $tweet = tweetBuilder(tweet);
-            $tweet.data('tweetID', i);
-            $tweet.appendTo($userStream);
-          }
-          //makes 'go home' button
-          var $homeButton = $('<button type="button" id="go_home">Return to Feed</button>');
-          $homeButton.click(function(){
-            console.log('clicked');
-            $(this).parent().slideUp(400, function(){
-              $('#stream').slideDown();
-              console.log('this works');
-              $('#get_new').toggle();
-            })
-            
-          })
-          $homeButton.appendTo($userStream);
 
-          console.log($userStream);
-          $('#stream').slideUp(400, function () {
-            $('#get_new').toggle();
-            $userStream.appendTo($body);
-            $userStream.slideDown();
-          })
+
+          //var user = $(this).data('user');
+          //console.log('clicked ' + user)
+          //var streamName = user +'Stream';
+          //var $userStream = $("<div id=" + streamName +"></div>");
+          //$userStream.addClass('userStream');
+          //for(var i = streams.users[user].length - 1; i >= 0; i--){
+            //var tweet = streams.users[user][i];
+            //console.log(tweet);
+            //var $tweet = tweetBuilder(tweet);
+            //$tweet.data('tweetID', i);
+            //$tweet.appendTo($userStream);
+          //}
+          //makes 'go home' button
+          //var $homeButton = $('<button type="button" id="go_home">Return to Feed</button>');
+          //$homeButton.click(function(){
+            //console.log('clicked');
+            //$(this).parent().slideUp(400, function(){
+              //$('#stream').slideDown();
+              //console.log('this works');
+              //$('#get_new').toggle();
+            //})
+            
+          //})
+          //$homeButton.appendTo($userStream);
+
+          //$('#stream').slideUp(400, function () {
+            //$('#get_new').toggle();
+            //$userStream.appendTo($body);
+            //$userStream.slideDown();
+          //})
         })
       });
     });

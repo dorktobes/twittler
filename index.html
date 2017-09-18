@@ -48,15 +48,37 @@
       }
       return time;
     }
-    function tweetTextBuilder(tweetObj){
-      var $user = $('<span></span>');
-      $user.addClass('user')
-      $user.text('@' + tweetObj.user);
-      var $timestamp = $('<span></span>');
-      $timestamp.addClass('timestamp')
-      $timestamp.text(timeRenderer(tweetObj.created_at) + 
-        ' ' + dateRenderer(tweetObj.created_at))
-      return $user.text() + ':' + tweetObj.message + ' -- ' + $timestamp.text();
+    function tweetBuilder(tweetObj){
+      var $tweet = $('<div></div>');
+      userBuilder(tweetObj, $tweet);
+      messageBuilder(tweetObj, $tweet);
+      timeBuilder(tweetObj, $tweet);
+      $tweet.addClass('tweet')
+      return $tweet;
+    }
+    function userBuilder(tweetObj, target){
+      var $user = $('<div></div>')
+          $user.addClass('user');
+          $user.data('user', tweetObj.user);
+          $user.text('@' + tweetObj.user);
+          $user.appendTo(target);
+    }
+    function messageBuilder(tweetObj, target){
+      var $message = $('<div></div>')
+          $message.addClass('message');
+          $message.data('message', tweetObj.message);
+          $message.text(tweetObj.message);
+          $message.appendTo(target);
+    }
+    function timeBuilder(tweetObj, target){
+      var $time = $('<div></div>')
+          $time.addClass('timestamp');
+          var date = dateRenderer(tweetObj.created_at);
+          var time = timeRenderer(tweetObj.created_at)
+          $time.data('date', date);
+          $time.data('time', time);
+          $time.text('--' + time + ' ' + date);
+          $time.appendTo(target);
     }
     
     
@@ -73,10 +95,8 @@
         var index = streams.home.length - 1;
        while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+          var $tweet = tweetBuilder(tweet);
           $tweet.data('tweetID', index);
-          $tweet.addClass('tweet')
-          $tweet.text(tweetTextBuilder(tweet));
           $tweet.appendTo($body);
           index -= 1;
         }

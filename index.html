@@ -117,21 +117,35 @@ $('button').on('click', function(){
     var i;
     for(i = lastPrinted + 1; i < streams.home.length; i++){
       var tweet = streams.home[i];
-          var $tweet = tweetBuilder(tweet);
-          //var $tweet = $('<div></div>');
-          $tweet.data('tweetID', i);
-          //$tweet.addClass('tweet')
-          //$tweet.text(tweetTextBuilder(tweet));
-          $tweet.prependTo($('div').first('#stream'));
+      var $tweet = tweetBuilder(tweet);
+      $tweet.data('tweetID', i);
+      $tweet.prependTo($('div').first('#stream'));
     }
     lastPrinted = i;
-    console.log('last tweet ID: ' + lastPrinted);
-    
+    console.log('last tweet ID: ' + lastPrinted);  
   }
 });
-        //when pressed
-          //check if first tweet on page's id + 1 is less than streams.home.length
-          //print 'new' tweets on page above the most recently printed tweets(.prependTo())
+//if username is clicked 
+$('.user').on('click', function () {
+  var user = $(this).data('user');
+  console.log('clicked ' + user)
+  var streamName = user +'Stream'
+  var $userStream = $("<div id=" + streamName +"></div>");
+  for(var i = streams.users[user].length - 1; i >= 0; i--){
+    var tweet = streams.users[user][i];
+    console.log(tweet);
+    var $tweet = tweetBuilder(tweet);
+    $tweet.data('tweetID', i);
+    $tweet.appendTo($userStream);
+  }
+  console.log($userStream);
+})
+  //create stream for user
+  //at bottom of userStream, make 'return to feed' button
+  //scroll away stream and scroll in  userStream
+  //if 'return to feed' button is pressed, 
+    //scroll away userStream, and scroll in stream
+        
 
 
       });

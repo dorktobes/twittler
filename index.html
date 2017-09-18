@@ -90,7 +90,7 @@
         var $title = $('<header id="title"><h1>TWITTLER</h1></header>');
         $title.appendTo($body);
         //create and add new tweet button
-        var $button = $('<button type="button">Load new tweets</button>');
+        var $button = $('<button type="button" id="get_new">Load new tweets</button>');
         $button.appendTo($body);
         //create tweet stream
         var $stream = $('<div id="stream"></div>');
@@ -110,7 +110,7 @@
       $(document).ready(function(){
         var lastPrinted;
         //action for 'load new tweets' button
-        $('button').on('click', function(){
+        $('#get_new').on('click', function(){
           console.log('checking tweets');
           //retrieve the id of the most recent tweet printed
           console.log('first tweet on feed: ' + $('.tweet:first').data('tweetID'));
@@ -148,7 +148,7 @@
           }
           console.log($userStream);
           $('#stream').slideUp(400, function () {
-            
+
             $userStream.appendTo($body);
             $userStream.slideDown();
           })

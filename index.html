@@ -87,17 +87,19 @@
         var $body = $('body');
         $body.html('');
         //create and add title
-        var $title = $('<header id="title"><h1>TWITTLER</h1></header>')
+        var $title = $('<header id="title"><h1>TWITTLER</h1></header>');
         $title.appendTo($body);
         //create and add new tweet button
-        var $button = $('<button type="button">Load new tweets</button>')
+        var $button = $('<button type="button">Load new tweets</button>');
         $button.appendTo($body);
+        var $stream = $('<div id="stream"></div>');
+        $stream.appendTo($body);
         var index = streams.home.length - 1;
        while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = tweetBuilder(tweet);
           $tweet.data('tweetID', index);
-          $tweet.appendTo($body);
+          $tweet.appendTo($stream);
           index -= 1;
         }
 var lastPrinted;

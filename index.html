@@ -97,6 +97,7 @@
               $(this).parent().slideUp(400, function(){
                 $('#stream').slideDown();
                 $('#get_new').toggle();
+                $(this).remove();
               })
             
             })
@@ -108,7 +109,7 @@
               $userStream.slideDown();
             })
           })
-          
+
           $user.data('user', tweetObj.user);
           $user.text('@' + tweetObj.user);
           $user.appendTo(target);
@@ -148,11 +149,8 @@
         var lastPrinted;
         //action for 'load new tweets' button
         $('#get_new').on('click', function(){
-          console.log('checking tweets');
           //retrieve the id of the most recent tweet printed
-          console.log('first tweet on feed: ' + $('.tweet:first').data('tweetID'));
           lastPrinted = lastPrinted || $('.tweet:first').data('tweetID');
-          console.log('last tweet ID: ' + lastPrinted);
           //check the tweet cue
           if((lastPrinted + 1) < streams.home.length){
             var i;
@@ -163,54 +161,7 @@
               $tweet.prependTo($('div').first('#stream'));
             }
             lastPrinted = i;
-            console.log('last tweet ID: ' + lastPrinted);  
           }
-        })
-      });
-
-        //username clicked
-      $('#stream').ready(function(){  
-
-
-
-
-
-
-
-        //if username is clicked 
-        $('div .user').on('click', function () {
-
-
-          //var user = $(this).data('user');
-          //console.log('clicked ' + user)
-          //var streamName = user +'Stream';
-          //var $userStream = $("<div id=" + streamName +"></div>");
-          //$userStream.addClass('userStream');
-          //for(var i = streams.users[user].length - 1; i >= 0; i--){
-            //var tweet = streams.users[user][i];
-            //console.log(tweet);
-            //var $tweet = tweetBuilder(tweet);
-            //$tweet.data('tweetID', i);
-            //$tweet.appendTo($userStream);
-          //}
-          //makes 'go home' button
-          //var $homeButton = $('<button type="button" id="go_home">Return to Feed</button>');
-          //$homeButton.click(function(){
-            //console.log('clicked');
-            //$(this).parent().slideUp(400, function(){
-              //$('#stream').slideDown();
-              //console.log('this works');
-              //$('#get_new').toggle();
-            //})
-            
-          //})
-          //$homeButton.appendTo($userStream);
-
-          //$('#stream').slideUp(400, function () {
-            //$('#get_new').toggle();
-            //$userStream.appendTo($body);
-            //$userStream.slideDown();
-          //})
         })
       });
     });

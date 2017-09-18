@@ -82,7 +82,7 @@
     }
     
     
-//initial tweet printer
+//initial set up
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
@@ -92,8 +92,10 @@
         //create and add new tweet button
         var $button = $('<button type="button">Load new tweets</button>');
         $button.appendTo($body);
+        //create tweet stream
         var $stream = $('<div id="stream"></div>');
         $stream.appendTo($body);
+        //initial tweet printer
         var index = streams.home.length - 1;
        while(index >= 0){
           var tweet = streams.home[index];
@@ -103,22 +105,24 @@
           index -= 1;
         }
 var lastPrinted;
-//create 'load new tweets' button
+//action for 'load new tweets' button
 $('button').on('click', function(){
   console.log('checking tweets');
   //retrieve the id of the most recent tweet printed
-  lastPrinted = lastPrinted || $('div').first('.tweet').data('tweetID');
+  console.log($('.tweet:first').data('tweetID'));
+  lastPrinted = lastPrinted || $('.tweet:first').data('tweetID');
   console.log('last tweet ID: ' + lastPrinted);
   //check the tweet cue
   if((lastPrinted + 1) < streams.home.length){
     var i;
     for(i = lastPrinted + 1; i < streams.home.length; i++){
       var tweet = streams.home[i];
-          var $tweet = $('<div></div>');
+          var $tweet = tweetBuilder(tweet);
+          //var $tweet = $('<div></div>');
           $tweet.data('tweetID', i);
-          $tweet.addClass('tweet')
-          $tweet.text(tweetTextBuilder(tweet));
-          $tweet.prependTo($('div').first('.tweet'));
+          //$tweet.addClass('tweet')
+          //$tweet.text(tweetTextBuilder(tweet));
+          $tweet.prependTo($('div').first('#stream'));
     }
     lastPrinted = i;
     console.log('last tweet ID: ' + lastPrinted);

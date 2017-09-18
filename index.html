@@ -132,13 +132,14 @@
       });
 
         //username clicked
-      $(document).ready(function(){  
+      $('#stream').ready(function(){  
         //if username is clicked 
         $('div .user').on('click', function () {
           var user = $(this).data('user');
           console.log('clicked ' + user)
           var streamName = user +'Stream';
           var $userStream = $("<div id=" + streamName +"></div>");
+          $userStream.addClass('userStream');
           for(var i = streams.users[user].length - 1; i >= 0; i--){
             var tweet = streams.users[user][i];
             console.log(tweet);
@@ -146,20 +147,26 @@
             $tweet.data('tweetID', i);
             $tweet.appendTo($userStream);
           }
+          //makes 'go home' button
           var $homeButton = $('<button type="button" id="go_home">Return to Feed</button>');
+          $homeButton.click(function(){
+            console.log('clicked');
+            $(this).parent().slideUp(400, function(){
+              $('#stream').slideDown();
+              console.log('this works');
+              $('#get_new').toggle();
+            })
+            
+          })
           $homeButton.appendTo($userStream);
+
           console.log($userStream);
           $('#stream').slideUp(400, function () {
-            $('#get_new').css({ 'display': 'none'});
+            $('#get_new').toggle();
             $userStream.appendTo($body);
             $userStream.slideDown();
           })
         })
-        //create stream for user
-        //at bottom of userStream, make 'return to feed' button
-        //scroll away stream and scroll in  userStream
-        //if 'return to feed' button is pressed, 
-        //scroll away userStream, and scroll in stream
       });
     });
 

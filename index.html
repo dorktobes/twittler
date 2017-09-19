@@ -16,6 +16,7 @@
         var $body = $('body');
         $body.html('');
         //create and add title
+        var hashtagTracker = [];
         var $title = $('<header id="title"><IMG src=resources/twittler.png></header>');
 
 
@@ -52,6 +53,42 @@
           if(hasHashtag){
             tweetObj.hashtag = hashtag;
           }
+        }
+        function hashtagStorer(arr){
+          for(var x = 0; x < arr.length; x++){
+            var hashtag = arr[x];
+            var alreadyExists = false;
+            if(hashtagTracker.length > 0){
+              for(var i = 0; i < hashtagTracker.length; i++){
+                if(hashtagTracker[i].hashtag === hashtag){
+                  hashtagTracker[i].timesUsed++;
+                  alreadyExists = true;
+                }
+              }
+            } else {
+              hashtagTracker.push({hashtag: hashtag, timesUsed: 1});
+              alreadyExists = true;
+            }
+            if(!alreadyExists){
+              hashtagTracker.push({hashtag: hashtag, timesUsed: 1});
+            }
+          }
+        }
+        function hashtagPrinter(hashtagArr){
+          $('#hashContainer').remove()
+          var $hashContainer = $('<div id="hashContainer"></div>');
+          var printArr = hashtagArr.sort(function(hashA, hashB){
+            return hashB.timesUsed - hashA.timesUsed;
+          })
+          printArr.forEach(function(hashObj){
+            var $wholeHash = $('<div class="wholeHash"></div>');
+            var $hash = $('<div class="hash">' + hashObj.hashtag + '</div>');
+            $hash.appendTo($wholeHash);
+            var $times = $('<div class="times">has been tweeted ' + hashObj.timesUsed + ' times</div>');
+            $times.appendTo($wholeHash);
+            $wholeHash.appendTo($hashContainer);
+          })
+          $hashContainer.appendTo($sidebar);
         }
     function dateRenderer(dateObj){
       if(!dateObj){
@@ -184,8 +221,15 @@
           var $tweet = tweetBuilder(tweet);
           $tweet.data('tweetID', index);
           $tweet.appendTo($stream);
+
+          hashtagFinder(tweet);
+          if(tweet.hashtag){
+            hashtagStorer(tweet.hashtag);
+            console.log(hashtagTracker);
+          }
           index -= 1;
         }
+        hashtagPrinter(hashtagTracker);
       
 
 //new tweet button
@@ -202,10 +246,16 @@
               var tweet = streams.home[i];
               var $tweet = tweetBuilder(tweet);
               $tweet.data('tweetID', i);
-              $tweet.prependTo($('div').first('#stream'));
+              $tweet.prependTo($('#stream'));
+              hashtagFinder(tweet);
+                if(tweet.hashtag){
+                  hashtagStorer(tweet.hashtag);
+                  console.log(hashtagTracker);
+                }
             }
             lastPrinted = i;
           }
+          hashtagPrinter(hashtagTracker);
         })
       });
     });

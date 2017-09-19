@@ -11,6 +11,7 @@ streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
 streams.users.douglascalhoun = [];
+streams.users.SFBART = [];
 window.users = Object.keys(streams.users);
 
 // utility function for adding tweets to our data structures
@@ -41,7 +42,11 @@ var randomMessage = function(){
 var generateRandomTweet = function(){
   var tweet = {};
   tweet.user = randomElement(users);
+  if(tweet.user === 'SFBART'){
+    tweet.message = 'Rider alert! Track rebuilding work between Lake Merritt & Fruitvale this weekend.'
+  } else {
   tweet.message = randomMessage();
+  }
   tweet.created_at = new Date();
   addTweet(tweet);
 };

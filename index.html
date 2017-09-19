@@ -90,7 +90,7 @@
           })
           $hashContainer.appendTo($sidebar);
         }
-    function dateRenderer(dateObj){
+        function dateRenderer(dateObj){
       if(!dateObj){
         console.log('undefined date')
         return '00/00/0000';
@@ -102,8 +102,8 @@
       date += '/';
       date += dateObj.getFullYear();
       return date;
-    }
-    function timeRenderer(dateObj){
+        }
+        function timeRenderer(dateObj){
       if(!dateObj){
         console.log('undefined date object');
         return '00:00';
@@ -129,32 +129,32 @@
         time += ' AM';
       }
       return time;
-    }
-    function tweetBuilder(tweetObj){
+        }
+        function tweetBuilder(tweetObj){
       var $tweet = $('<div></div>');
       userBuilder(tweetObj, $tweet);
       timeBuilder(tweetObj, $tweet);
       messageBuilder(tweetObj, $tweet);
       $tweet.addClass('tweet')
       return $tweet;
-    }
-    //the next two functions are used to generate the tweets for a userStream. They don't allow the username's to be clicked on
-    function usTweetBuilder(tweetObj){
+        }
+        //the next two functions are used to generate the tweets for a userStream. They don't allow the username's to be clicked on
+        function usTweetBuilder(tweetObj){
       var $tweet = $('<div></div>');
       usUserBuilder(tweetObj, $tweet);
       timeBuilder(tweetObj, $tweet);
       messageBuilder(tweetObj, $tweet);
       $tweet.addClass('tweet')
       return $tweet;
-    }
-    function usUserBuilder(tweetObj, target){
+        }
+        function usUserBuilder(tweetObj, target){
       var $user = $('<div></div>')
           $user.addClass('user');
           $user.data('user', tweetObj.user);
           $user.text('@' + tweetObj.user);
           $user.appendTo(target);
-    }
-    function userBuilder(tweetObj, target){
+        }
+        function userBuilder(tweetObj, target){
       var $user = $('<div></div>')
           $user.addClass('user');
 
@@ -194,15 +194,15 @@
           $user.data('user', tweetObj.user);
           $user.text('@' + tweetObj.user);
           $user.appendTo(target);
-    }
-    function messageBuilder(tweetObj, target){
+        }
+        function messageBuilder(tweetObj, target){
       var $message = $('<div></div>')
           $message.addClass('message');
           $message.data('message', tweetObj.message);
           $message.text(tweetObj.message);
           $message.appendTo(target);
-    }
-    function timeBuilder(tweetObj, target){
+        }
+        function timeBuilder(tweetObj, target){
       var $time = $('<div></div>')
           $time.addClass('timestamp');
           var date = dateRenderer(tweetObj.created_at);
@@ -211,12 +211,12 @@
           $time.data('time', time);
           $time.text('--' + time + ' ' + date);
           $time.appendTo(target);
-    }
+        }
 
 
         //initial tweet printer
         var index = streams.home.length - 1;
-       while(index >= 0){
+        while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = tweetBuilder(tweet);
           $tweet.data('tweetID', index);
@@ -225,7 +225,6 @@
           hashtagFinder(tweet);
           if(tweet.hashtag){
             hashtagStorer(tweet.hashtag);
-            console.log(hashtagTracker);
           }
           index -= 1;
         }
@@ -239,6 +238,7 @@
         $('#get_new').on('click', function(){
           //retrieve the id of the most recent tweet printed
           lastPrinted = lastPrinted || $('.tweet:first').data('tweetID');
+          console.log($('.tweet:first').data('tweetID'));
           //check the tweet cue
           if((lastPrinted + 1) < streams.home.length){
             var i;
@@ -250,7 +250,6 @@
               hashtagFinder(tweet);
                 if(tweet.hashtag){
                   hashtagStorer(tweet.hashtag);
-                  console.log(hashtagTracker);
                 }
             }
             lastPrinted = i;

@@ -1,4 +1,8 @@
 body{ background-color: #c0deed; }
+button{
+	border-radius: 25%;
+	background-color: #008cba
+}
 #title{  width: 1049px;
 	      margin-left: auto;
 	      margin-right: auto; }
@@ -6,11 +10,11 @@ body{ background-color: #c0deed; }
           margin-left: auto ;
           margin-right: auto ;
       	  background-color: silver;}
-.tweet{ width: 496px;
+.tweet{ width: 494px;
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 2px;
-		margin-bottom: 2px;
+		margin-top: 3px;
+		margin-bottom: 3px;
 		background-color: white; }
 .user{  font-weight: bold; }
 .timestamp{  font-style: italic; }

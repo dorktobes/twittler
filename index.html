@@ -212,6 +212,26 @@
           $time.text('--' + time + ' ' + date);
           $time.appendTo(target);
         }
+        function newTweetGetter(){
+          //retrieve the id of the most recent tweet printed
+          lastPrinted = $('.tweet:first').data('tweetID');
+          console.log($('.tweet:first').data('tweetID'));
+          //check the tweet cue
+          if((lastPrinted + 1) < streams.home.length){
+            var i;
+            for(i = lastPrinted + 1; i < streams.home.length; i++){
+              var tweet = streams.home[i];
+              var $tweet = tweetBuilder(tweet);
+              $tweet.data('tweetID', i);
+              $tweet.prependTo($('#stream'));
+              hashtagFinder(tweet);
+                if(tweet.hashtag){
+                  hashtagStorer(tweet.hashtag);
+                }
+            }
+          }
+          hashtagPrinter(hashtagTracker);
+        }
 
 
         //initial tweet printer
@@ -232,30 +252,18 @@
       
 
 //new tweet button
+        var checkForTweets = function(){
+          newTweetGetter();
+          setTimeout(checkForTweets, 30000);
+        };
+        checkForTweets();
       $(document).ready(function(){
         var lastPrinted;
         //action for 'load new tweets' button
         $('#get_new').on('click', function(){
-          //retrieve the id of the most recent tweet printed
-          lastPrinted = lastPrinted || $('.tweet:first').data('tweetID');
-          console.log($('.tweet:first').data('tweetID'));
-          //check the tweet cue
-          if((lastPrinted + 1) < streams.home.length){
-            var i;
-            for(i = lastPrinted + 1; i < streams.home.length; i++){
-              var tweet = streams.home[i];
-              var $tweet = tweetBuilder(tweet);
-              $tweet.data('tweetID', i);
-              $tweet.prependTo($('#stream'));
-              hashtagFinder(tweet);
-                if(tweet.hashtag){
-                  hashtagStorer(tweet.hashtag);
-                }
-            }
-            lastPrinted = i;
-          }
-          hashtagPrinter(hashtagTracker);
+          newTweetGetter();
         })
+
       });
     });
 

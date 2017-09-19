@@ -74,6 +74,22 @@
       $tweet.addClass('tweet')
       return $tweet;
     }
+    //the next two functions are used to generate the tweets for a userStream. They don't allow the username's to be clicked on
+    function usTweetBuilder(tweetObj){
+      var $tweet = $('<div></div>');
+      usUserBuilder(tweetObj, $tweet);
+      messageBuilder(tweetObj, $tweet);
+      timeBuilder(tweetObj, $tweet);
+      $tweet.addClass('tweet')
+      return $tweet;
+    }
+    function usUserBuilder(tweetObj, target){
+      var $user = $('<div></div>')
+          $user.addClass('user');
+          $user.data('user', tweetObj.user);
+          $user.text('@' + tweetObj.user);
+          $user.appendTo(target);
+    }
     function userBuilder(tweetObj, target){
       var $user = $('<div></div>')
           $user.addClass('user');
@@ -88,7 +104,7 @@
             for(var i = streams.users[user].length - 1; i >= 0; i--){
               var tweet = streams.users[user][i];
               console.log(tweet);
-              var $tweet = tweetBuilder(tweet);
+              var $tweet = usTweetBuilder(tweet);
               $tweet.data('tweetID', i);
               $tweet.appendTo($userStream);
             }

@@ -33,7 +33,7 @@ var verbs = ['downloaded', 'interfaced', 'deployed', 'developed', 'built', 'inve
 var objects = ['my', 'your', 'the', 'a', 'my', 'an entire', 'this', 'that', 'the', 'the big', 'a new form of'];
 var nouns = ['cat', 'koolaid', 'system', 'city', 'worm', 'cloud', 'potato', 'money', 'way of life', 'belief system', 'security system', 'bad decision', 'future', 'life', 'pony', 'mind'];
 var tags = ['#techlife', '#burningman', '#sf', 'but only i know how', 'for real', '#sxsw', '#ballin', '#omg', '#yolo', '#magic', '', '', '', ''];
-var bartTweets = ['Rider alert! Track rebuilding work between Lake Merritt & Fruitvale this weekend.', 'BART was built to transport far fewer people, and much of our system has reached the end of its useful life. This is our reality.', 'We challenge @metrolosangeles to a transit poetry slam. Haikus only. Your move, LA.', 'Pied Piper Hooli Tech bros in Dolores Park We just chill and ride@SFBART', 'Accept our challenge Your silence is deafening NorCal is best Cal@metrolosangeles']
+var bartTweets = ['Rider alert! Track rebuilding work between Lake Merritt & Fruitvale this weekend.', 'BART was built to transport far fewer people, and much of our system has reached the end of its useful life. This is our reality.', 'We challenge @metrolosangeles to a transit poetry slam. Haikus only. Your move, LA.', 'Pied Piper Hooli Tech bros in Dolores Park We just chill and ride@SFBART', 'Accept our challenge Your silence is deafening NorCal is best Cal @metrolosangeles']
 var randomMessage = function(){
   return [randomElement(opening), randomElement(verbs), randomElement(objects), randomElement(nouns), randomElement(tags)].join(' ');
 };

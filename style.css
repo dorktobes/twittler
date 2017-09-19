@@ -1,4 +1,7 @@
 body{ background-color: #c0deed; }
+#title{  width: 1049px;
+	      margin-left: auto;
+	      margin-right: auto; }
 #stream{  width: 500px ;
           margin-left: auto ;
           margin-right: auto ;
@@ -10,3 +13,7 @@ body{ background-color: #c0deed; }
 		margin-bottom: 2px;
 		background-color: white; }
 .user{  font-weight: bold; }
+.timestamp{  font-style: italic; }
+.message{  font-size: 17px
+           font-family: 'Helvetica Neue'; 
+           }

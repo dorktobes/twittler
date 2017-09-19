@@ -20,14 +20,39 @@
 
 
         $title.appendTo($body);
+        //create a top bar where users can tweet their own tweets
+        var $topbar = $('<div id="topbar"></div>');
+        $topbar.appendTo($body);
         //create and add new tweet button
         var $button = $('<button type="button" id="get_new">Load new tweets</button>');
-        $button.appendTo($body);
+        $button.appendTo($topbar);
+        //create a place for users to create their own tweets
+
+        //create a sidebar to keep track of hashtags
+        var $sidebar = $('<div id="hashtagTable"></div>');
+        $sidebar.appendTo($body);
+        var $sidebarTitle = $('<div id="hashtagTableTitle">Trending Topics</div>');
+        $sidebarTitle.appendTo($sidebar);
         //create tweet stream
         var $stream = $('<div id="stream"></div>');
         $stream.appendTo($body);
 
          //helper functions
+        function hashtagFinder(tweetObj){
+          var tweet = tweetObj.message;
+          var tweetWords = tweet.split(' ');
+          var hashtag = [];
+          var hasHashtag = false;
+          for(var i = 0; i < tweetWords.length; i++){
+            if(tweetWords[i][0]=== '#'){
+              hashtag.push(tweetWords[i]);
+              hasHashtag = true;
+            }
+          }
+          if(hasHashtag){
+            tweetObj.hashtag = hashtag;
+          }
+        }
     function dateRenderer(dateObj){
       if(!dateObj){
         console.log('undefined date')

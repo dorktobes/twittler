@@ -17,7 +17,7 @@
         $body.html('');
         //create and add title
         var $title = $('<header id="title"><IMG src=resources/twittler.png></header>');
-        
+
 
         $title.appendTo($body);
         //create and add new tweet button
@@ -71,8 +71,8 @@
     function tweetBuilder(tweetObj){
       var $tweet = $('<div></div>');
       userBuilder(tweetObj, $tweet);
-      messageBuilder(tweetObj, $tweet);
       timeBuilder(tweetObj, $tweet);
+      messageBuilder(tweetObj, $tweet);
       $tweet.addClass('tweet')
       return $tweet;
     }
@@ -80,8 +80,8 @@
     function usTweetBuilder(tweetObj){
       var $tweet = $('<div></div>');
       usUserBuilder(tweetObj, $tweet);
-      messageBuilder(tweetObj, $tweet);
       timeBuilder(tweetObj, $tweet);
+      messageBuilder(tweetObj, $tweet);
       $tweet.addClass('tweet')
       return $tweet;
     }

@@ -25,7 +25,7 @@
         var $topbar = $('<div id="topbar"></div>');
         $topbar.appendTo($body);
         //create and add new tweet button
-        var $button = $('<button type="button" id="get_new">Load new tweets</button>');
+        var $button = $('<button type="button" id="get_new">See new tweets</button>');
         $button.appendTo($topbar);
         //create a place for users to create their own tweets
 
@@ -254,7 +254,7 @@
 //new tweet button
         var checkForTweets = function(){
           newTweetGetter();
-          setTimeout(checkForTweets, 30000);
+          setTimeout(checkForTweets, 60000);
         };
         checkForTweets();
       $(document).ready(function(){

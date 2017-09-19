@@ -1,23 +1,62 @@
-body{ background-color: #c0deed; }
+body{ 
+	background-color: #e6ecf0; }
 button{
 	border-radius: 25%;
 	background-color: #008cba
 }
-#title{  width: 1049px;
-	      margin-left: auto;
-	      margin-right: auto; }
-#stream{  width: 500px ;
-          margin-left: auto ;
-          margin-right: auto ;
-      	  background-color: silver;}
-.tweet{ width: 494px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 3px;
-		margin-bottom: 3px;
-		background-color: white; }
-.user{  font-weight: bold; }
-.timestamp{  font-style: italic; }
-.message{  font-size: 17px
-           font-family: 'Helvetica Neue'; 
-           }
+#title{  
+	width: 1049px;
+	margin-left: auto;
+	margin-right: auto; }
+#stream{  
+	width: 500px ;
+  margin-left: 16px ;
+  margin-right: 16px ;
+  display: inline-block;
+  vertical-align:top
+  }
+.tweet{ 
+	width: 494px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background-color: white; }
+.user{  
+	font-weight: bold;
+  display: inline-block; }
+.timestamp{  
+	font-style: italic;
+  display: inline-block; }
+.message{  
+	font-size: 17px
+    font-family: 'Helvetica Neue'; }
+#hashtagTable{
+  width: 258px;
+  padding: 15px;
+  border: 1px;
+  margin-left: 342.5px;
+  display: inline-block;
+  background: #ffffff;
+  vertical-align:top
+}
+.hash{
+  font-weight: bold;
+  color: #0084b4;
+  font-size: 18px;
+}
+.times{
+  font-style: italic;
+}
+#hashtagTableTitle{
+  font-weight: bold;
+  font-size: 20px;
+  font: Helvetica;
+}
+.userStream{
+  width: 500px ;
+  margin-left: 16px ;
+  margin-right: 16px ;
+  display: inline-block;
+  vertical-align:top
+}

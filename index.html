@@ -27,8 +27,6 @@
         //create and add new tweet button
         var $button = $('<button type="button" id="get_new">See new tweets</button>');
         $button.appendTo($topbar);
-        //create a place for users to create their own tweets
-
         //create a sidebar to keep track of hashtags
         var $sidebar = $('<div id="hashtagTable"></div>');
         $sidebar.appendTo($body);
@@ -215,7 +213,6 @@
         function newTweetGetter(){
           //retrieve the id of the most recent tweet printed
           lastPrinted = $('.tweet:first').data('tweetID');
-          console.log($('.tweet:first').data('tweetID'));
           //check the tweet cue
           if((lastPrinted + 1) < streams.home.length){
             var i;
@@ -251,18 +248,21 @@
         hashtagPrinter(hashtagTracker);
       
 
-//new tweet button
+        //renders new tweets every minute
         var checkForTweets = function(){
           newTweetGetter();
           setTimeout(checkForTweets, 60000);
         };
         checkForTweets();
+        //script for if new tweet button is clicked
       $(document).ready(function(){
         var lastPrinted;
         //action for 'load new tweets' button
         $('#get_new').on('click', function(){
           newTweetGetter();
         })
+
+        
 
       });
     });
